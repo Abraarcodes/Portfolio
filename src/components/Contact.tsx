@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, MessageCircle, Send, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, MessageCircle, Send, Github, Linkedin } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,13 +31,8 @@ const Contact = () => {
 
     if (!section || !title || !form || !info) return;
 
-    // Initial states
-    gsap.set([title, form, info], {
-      opacity: 0,
-      y: 60,
-    });
+    gsap.set([title, form, info], { opacity: 0, y: 60 });
 
-    // Animation timeline
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -52,43 +47,50 @@ const Contact = () => {
       y: 0,
       duration: 1,
       ease: "power2.out",
-    })
-      .to(
-        [form, info],
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          stagger: 0.2,
-        },
-        "-=0.5"
-      );
+    }).to(
+      [form, info],
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.2,
+      },
+      "-=0.5"
+    );
 
     return () => {
       tl.kill();
     };
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+      const res = await fetch("https://formspree.io/f/mqayeqda", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
-      setFormData({ name: "", email: "", message: "" });
+      if (res.ok) {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Failed to send message");
+      }
     } catch (error) {
       toast({
         title: "Error",
@@ -105,26 +107,34 @@ const Contact = () => {
       name: "GitHub",
       icon: Github,
       url: "https://github.com/Abraarcodes",
-      color: "hover:text-gray-400"
+      color: "hover:text-gray-400",
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
       url: "https://www.linkedin.com/in/mohammed-abraar1/",
-      color: "hover:text-blue-400"
+      color: "hover:text-blue-400",
     },
   ];
 
   return (
-    <section id="contact" ref={sectionRef} className="py-20 lg:py-32 relative overflow-hidden">
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="py-20 lg:py-32 relative overflow-hidden"
+    >
       {/* Background Pattern */}
       <div className="absolute inset-0 grid-pattern opacity-5" />
-      
+
       {/* Floating Orbs */}
-      <div className="absolute top-20 left-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl animate-float" 
-           style={{ animationDelay: "1s" }} />
-      <div className="absolute bottom-40 right-20 w-48 h-48 bg-accent/10 rounded-full blur-3xl animate-float" 
-           style={{ animationDelay: "4s" }} />
+      <div
+        className="absolute top-20 left-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl animate-float"
+        style={{ animationDelay: "1s" }}
+      />
+      <div
+        className="absolute bottom-40 right-20 w-48 h-48 bg-accent/10 rounded-full blur-3xl animate-float"
+        style={{ animationDelay: "4s" }}
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
@@ -134,8 +144,8 @@ const Contact = () => {
           </h2>
           <div className="w-20 h-1 bg-gradient-primary rounded-full mx-auto mb-6" />
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Have a project in mind or want to collaborate? I'd love to hear from you. 
-            Let's create something amazing together.
+            Have a project in mind or want to collaborate? I'd love to hear from
+            you. Let's create something amazing together.
           </p>
         </div>
 
@@ -144,7 +154,7 @@ const Contact = () => {
           <div ref={infoRef} className="space-y-8">
             <div>
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
-              
+
               <div className="space-y-6">
                 {/* Email */}
                 <div className="flex items-center space-x-4 group">
@@ -153,7 +163,10 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-medium">Email</h4>
-                    <a href="mailto:hello@abraar.dev" className="text-muted-foreground hover:text-primary transition-colors">
+                    <a
+                      href="mailto:mohammedabraar360@gmail.com"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
                       mohammedabraar360@gmail.com
                     </a>
                   </div>
@@ -166,7 +179,9 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-medium">Quick Response</h4>
-                    <p className="text-muted-foreground">Usually reply within 24 hours</p>
+                    <p className="text-muted-foreground">
+                      Usually reply within 24 hours
+                    </p>
                   </div>
                 </div>
               </div>
@@ -197,25 +212,33 @@ const Contact = () => {
             <div className="glass-card p-6 rounded-2xl">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <span className="font-medium text-green-400">Available for new projects</span>
+                <span className="font-medium text-green-400">
+                  Available for new projects
+                </span>
               </div>
               <p className="text-muted-foreground text-sm">
-                Currently accepting new freelance projects and collaboration opportunities. 
-                Let's discuss your ideas and bring them to life!
+                Currently accepting new freelance projects and collaboration
+                opportunities. Let's discuss your ideas and bring them to life!
               </p>
             </div>
           </div>
 
           {/* Contact Form */}
           <div ref={formRef}>
-            <form onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl space-y-6">
+            <form
+              onSubmit={handleSubmit}
+              className="glass-card p-8 rounded-2xl space-y-6"
+            >
               <div>
                 <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Your Name
                   </label>
                   <Input
@@ -231,7 +254,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Email Address
                   </label>
                   <Input
@@ -247,7 +273,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Message
                   </label>
                   <Textarea
