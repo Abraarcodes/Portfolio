@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import profileImage from "@/assets/profile.png";
+import { Button } from "./ui/button";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -124,6 +126,15 @@ const About = () => {
   challenges, continuously pushing the boundaries of what's possible in web 
   development.
 </p>
+ <a
+  href="https://docs.google.com/document/d/1lVmEt6ukatfU_0You-qNZV4KoxkA3q0P/edit?usp=sharing&ouid=107706890794007077665&rtpof=true&sd=true"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block px-6 py-3 bg-gradient-primary hover:bg-gradient-secondary text-primary-foreground rounded-lg glow-primary hover:scale-105 transition-all duration-300 text-lg font-medium"
+>
+  View My Resume
+</a>
+
             </div>
 
             {/* Stats */}

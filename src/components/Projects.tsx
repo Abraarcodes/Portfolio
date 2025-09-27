@@ -37,7 +37,7 @@ const Projects = () => {
     title: "IKBROS | B2B Website",
     description: `
       Engineered and launched a fully responsive B2B website from the ground up using Next.js, replacing an outdated PHP-based platform.
-      Eliminated server and hosting costs by deploying the static site on Vercel, providing a cost-effective solution for the client.
+      Eliminated server and hosting costs by deploying the static site on a free hosting platform, providing a cost-effective solution for the client.
       Improved UX with modern UI, intuitive product categories, and dynamic search functionality.
       Executed a comprehensive SEO strategy to boost online visibility.
     `,

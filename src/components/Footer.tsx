@@ -123,7 +123,7 @@ const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-2 text-sm">
               <p className="text-muted-foreground">
-                <span className="text-foreground">Email:</span> hello@abraar.dev
+                <span className="text-foreground">Email:</span> mohammedabraar360@gmail.com
               </p>
               <p className="text-muted-foreground">
                 <span className="text-foreground">Location:</span> Available Worldwide

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
+import { Menu, X, Github, Linkedin, Mail,FileText } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
 const Navigation = () => {
@@ -85,6 +86,14 @@ const Navigation = () => {
                 >
                   <Linkedin size={18} />
                 </a>
+                <a
+                  href="https://docs.google.com/document/d/1lVmEt6ukatfU_0You-qNZV4KoxkA3q0P/edit?usp=sharing&ouid=107706890794007077665&rtpof=true&sd=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors "
+                >
+                <FileText size={18}/>
+                </a>
                 {/* <a
                   href="mailto:hello@abraar.dev"
                   className="text-muted-foreground hover:text-primary transition-colors"
@@ -142,7 +151,7 @@ const Navigation = () => {
 
             <div className="flex items-center space-x-6 mt-8">
               <a
-                href="https://github.com"
+                href="https://github.com/Abraarcodes"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -150,19 +159,19 @@ const Navigation = () => {
                 <Github size={24} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/mohammed-abraar1/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Linkedin size={24} />
               </a>
-              <a
+              {/* <a
                 href="mailto:hello@abraar.dev"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail size={24} />
-              </a>
+              </a> */}
             </div>
 
             <Button
